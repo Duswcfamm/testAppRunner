@@ -1,4 +1,11 @@
-FROM --platform=linux/amd64 nginx:latest
-WORKDIR /usr/share/nginx/html
-COPY index.html index.html
-PORT 8080
+# Use a lightweight Nginx image as the base
+FROM nginx:alpine
+
+# Copy your website files to the Nginx default directory
+COPY ./website /usr/share/nginx/html
+
+# Expose the Nginx port
+EXPOSE 80
+
+# Start Nginx when the container starts
+CMD ["nginx", "-g", "daemon off;"]
